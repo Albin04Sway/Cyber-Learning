@@ -10,3 +10,4 @@ TCP vs UDP - 2 ways to send data
     TCP is reliable, ordered and confirmed. Before data is sent, it does a three-way-handshake to establish connection. In a phone call, before starting to talk, you make sure the call is connected, same thing.
     UDP is fast, no confirmation, fire and forget. Just like sending a letter, ydk if its arrived.
     Port scanners work on TCP because TCP requires a connection to be established. Scanning a port with TCP means that if there is an established connection, there will also be a response.
+git p
