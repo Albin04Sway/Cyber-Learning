@@ -1,5 +1,5 @@
 target_ip = input("Target IP: ")
-port = input("Port: ")
+port = int(input("Port: "))
 protocol = "TCP"
 
 print("--- Scan Target ---")
