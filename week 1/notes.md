@@ -27,3 +27,65 @@ String Methods
 - .strip() - removes whitespace
 - .split() - splits a string into a list
 - len()    - an integer of the length
+
+## Day 3 - Edge Cases and Validation
+
+### What is an edge case?
+Input or situation your code didn't expect.
+Always think: what could a user type that breaks this?
+
+### Validation pattern
+valid = True          # assume innocent until proven guilty
+for part in parts:    # check each piece
+    if bad:           # if anything fails
+        valid = False # mark as invalid
+if valid:             # final verdict
+    ...
+
+### Three ways an IP part fails validation
+1. Contains letters or symbols - not a digit
+2. Value is less than 0
+3. Value is greater than 255
+
+### elif vs else
+elif  - another condition to check (has a condition)
+else  - final fallback if nothing matched (no condition)
+
+### TCP Three Way Handshake
+SYN     - scanner says "can we connect?"
+SYN-ACK - target says "yes, ready"
+ACK     - scanner confirms, connection open
+
+Port responses:
+Open     - SYN-ACK received
+Closed   - RST received
+Filtered - silence, timeout
+## Day 3 - Sockets and What Happens Under the Hood
+
+### What is a socket?
+IP Address + Port + Protocol = Socket
+The full address of a specific service on a specific machine
+
+### Socket code breakdown
+import socket                              # pull in the library
+s = socket.socket(AF_INET, SOCK_STREAM)   # create TCP/IPv4 socket
+s.settimeout(1)                           # wait max 1 second
+result = s.connect_ex((target, port))     # attempt handshake
+if result == 0 → port is OPEN            # 0 = success
+s.close()                                 # always close the socket
+
+### Pentesting output conventions
+[+]  positive - something found
+[-]  negative - nothing found
+[!]  warning or error
+[*]  informational
+
+### Wireshark packet patterns
+Open port:     SYN → SYN-ACK → ACK
+Closed port:   SYN → RST
+Filtered port: SYN → silence → timeout
+
+### Why settimeout matters
+Without it, filtered ports hang your scanner forever
+Too short = false negatives (slow ports look closed)
+Too long = slow scanner
