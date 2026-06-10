@@ -89,3 +89,35 @@ Filtered port: SYN → silence → timeout
 Without it, filtered ports hang your scanner forever
 Too short = false negatives (slow ports look closed)
 Too long = slow scanner
+
+## DAY 4
+
+## Banner Grabbing
+
+What is a banner?
+An identification message services send when you connect.
+Contains software name, version, sometimes OS.
+
+Why it matters:
+Software version → CVE lookup → known exploits
+One version number = difference between safe and compromised
+
+HTTP response codes:
+200 OK        - request succeeded
+403 Forbidden - server understood but refused
+404 Not Found - resource doesn't exist
+500 Server Error - something broke on the server side
+
+Real example:
+Apache/2.4.7 → decade old → multiple known CVEs → viable target
+Server: cloudflare → real server hidden → need to find origin IP
+
+Key insight:
+Even error responses (403) leak server information.
+Well hardened servers strip the Server: header entirely.
+
+## CVE — Common Vulnerabilities and Exposures
+Public database at cve.mitre.org
+Every known vulnerability in every piece of software
+Format: CVE-YEAR-NUMBER e.g. CVE-2021-41773
+Search software version → find exploits → attack vector identified
